@@ -1,0 +1,39 @@
+import base64
+from Crypto.Cipher import AES
+from Crypto import Random
+import struct
+
+class AESCipher:
+  def __init__( self, key ):
+      self.key = key
+
+  def encrypt( self, raw ):
+    cipher = AES.new( self.key )
+    return cipher.encrypt(raw)
+
+  def decrypt( self, enc ):
+    cipher = AES.new(self.key)
+    return cipher.decrypt(enc)
+
+key = [0x13, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0xB4, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x52, 0x00, 0x00, 0x00]
+keystr = bytes(bytearray(key))
+orig = [70, 114, 122, 82, 70, 114, 122, 82, 70, 114, 122, 82, 70, 114, 122, 82]
+
+cipher = AESCipher(keystr)
+neworig = bytes(bytearray(orig))
+a = cipher.encrypt(neworig)
+print struct.unpack('!16b', a)
+
+
+import random
+import struct
+from Crypto.Cipher import AES
+
+key = [0x13, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0xB4, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x52, 0x00, 0x00, 0x00]
+
+def AESencrypt(data):
+  cipher = AES.new(bytes(bytearray(key)))
+  return struct.unpack('!16b', cipher.encrypt(bytes(bytearray(data))))
+
+orig = [70, 114, 122, 82, 70, 114, 122, 82, 70, 114, 122, 82, 70, 114, 122, 82]
+print AESencrypt(orig)

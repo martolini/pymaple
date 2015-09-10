@@ -1,0 +1,11 @@
+cffi==1.2.1
+enum34==1.0.4
+idna==2.0
+ipaddress==1.0.14
+pyasn1==0.1.8
+pycparser==2.14
+pycrypto==2.6.1
+six==1.9.0
+Twisted==15.4.0
+wheel==0.24.0
+zope.interface==4.1.2
